@@ -1,0 +1,34 @@
+if game.PlaceID == 14400545236 then
+
+	--------UI----------
+
+	local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+	local Window = OrionLib:MakeWindow({Name = "Hoc Lua", HidePremium = false, SaveConfig = false, ConfigFolder = "Test"})
+
+	------------Values------
+	_G.autoclick = true
+
+
+
+
+	-----func-------
+	function autoclick()
+		while _G.autoclick = true do
+			game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ClickService"):WaitForChild("RF"):WaitForChild("Click"):InvokeServer()
+		end
+
+	local FarmTab = Window:MakeTab({
+		Name = "Auto Farm",
+		Icon = "rbxassetid://4483345998",
+		PremiumOnly = false
+	})
+
+	------Togles-------
+	FarmTab:AddToggle({
+		Name = "Auto Click",
+		Default = false,
+		Callback = function(Value)
+			_G.autoclick = Value
+			autoclick()
+		end    
+	})
