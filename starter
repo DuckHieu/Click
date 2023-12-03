@@ -16,6 +16,7 @@ if game.PlaceID == 14400545236 then
 		while _G.autoclick = true do
 			game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ClickService"):WaitForChild("RF"):WaitForChild("Click"):InvokeServer()
 		end
+	end
 
 	local FarmTab = Window:MakeTab({
 		Name = "Auto Farm",
@@ -32,3 +33,15 @@ if game.PlaceID == 14400545236 then
 			autoclick()
 		end    
 	})
+
+
+
+
+
+
+
+
+
+
+end
+OrionLib:Init()
