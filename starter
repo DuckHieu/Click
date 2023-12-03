@@ -13,7 +13,7 @@ if game.PlaceID == 14400545236 then
 
 	-----func-------
 	function autoclick()
-		while _G.autoclick = true do
+		while _G.autoclick == true do
 			game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit"):WaitForChild("Services"):WaitForChild("ClickService"):WaitForChild("RF"):WaitForChild("Click"):InvokeServer()
 		end
 	end
@@ -33,15 +33,3 @@ if game.PlaceID == 14400545236 then
 			autoclick()
 		end    
 	})
-
-
-
-
-
-
-
-
-
-
-end
-OrionLib:Init()
