@@ -32,6 +32,15 @@ FarmTab:AddToggle({
         AutoFarmQuest = Value
     end    
 })
+FarmTab:AddToggle({
+    Name = "FastAttack (risk)",
+    Default = false,
+    Flag = "Fast",
+    Save = false,
+    Callback = function(Value)
+        FastAttack() = Value
+    end    
+})
 
 
 
