@@ -3,7 +3,7 @@ local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/d
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
 --------------------------------------------------------------------------------------------------------------------------------------------
 local Window = Fluent:CreateWindow({
-    Title = "Vair Hub",
+    Title = "Vair",
     SubTitle = "made by Akiki",
     TabWidth = 160,
     Size = UDim2.fromOffset(520, 400),
@@ -2595,10 +2595,7 @@ coroutine.wrap(YTZCAJC_fake_script)()
         end
         end)
 
-        local AttackNoCDa = Tabs.Main:AddToggle("ToggleFastAttack", {Title = "Fasttack V2", Default = false })
-        ToggleAttackNoCDa:OnChanged(function(Value)
-            AttackNoCD()
-        end)
+
 --------------------------------------------------------------------------------------------------------------------------------------------
 
     local ToggleMobAura = Tabs.Main:AddToggle("ToggleMobAura", {Title = "Auto Near Mob", Default = false })
