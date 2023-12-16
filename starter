@@ -29,7 +29,7 @@ FarmTab:AddToggle({
     Flag = "Farm",
     Save = false,
     Callback = function(Value)
-        AutoFarmQuest = Value
+        AutoFarmQuest = true
     end    
 })
 
