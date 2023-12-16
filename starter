@@ -4,7 +4,7 @@ local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.
 --------------------------------------------------------------------------------------------------------------------------------------------
 local Window = Fluent:CreateWindow({
     Title = "Vair Hub",
-    SubTitle = "made by DauCoGhe and Ruagjy",
+    SubTitle = "made by Akiki",
     TabWidth = 160,
     Size = UDim2.fromOffset(520, 400),
     Acrylic = true, -- The blur may be detectable, setting this to false disables blur entirely
@@ -2595,9 +2595,9 @@ coroutine.wrap(YTZCAJC_fake_script)()
         end
         end)
 
-        local AttackNoCD = Tabs.Main:AddToggle("ToggleFastAttack", {Title = "Fasttack V2", Default = false })
-        ToggleAttackNoCD:OnChanged(function(Value)
-            _G.AttackNoCD = Value
+        local AttackNoCDa = Tabs.Main:AddToggle("ToggleFastAttack", {Title = "Fasttack V2", Default = false })
+        ToggleAttackNoCDa:OnChanged(function(Value)
+            AttackNoCD()
         end)
 --------------------------------------------------------------------------------------------------------------------------------------------
 
