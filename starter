@@ -23,7 +23,7 @@ local Farm = Window:MakeTab({
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-M:AddToggle({
+Farm:AddToggle({
     Name = "Auto Farm",
     Default = false,
     Flag = "Farm",
