@@ -33,13 +33,11 @@ FarmTab:AddToggle({
     end    
 })
 FarmTab:AddToggle({
-    Name = "FastAttack (risk)",
-    Default = false,
-    Flag = "Fast",
-    Save = false,
-    Callback = function(Value)
-    _G.FastAttack = Value
-    end    
+	Name = "Fast Attack(Risk)",
+	Default = false,
+	Callback = function(Value)
+		_G.AttackNoCD = Value
+	end    
 })
 
 
@@ -81,7 +79,7 @@ function GetCurrentBlade()
     while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
     return ret
 end
-function FastAttack() 
+function AttackNoCD()
     local AC = CbFw2.activeController
     for i = 1, 1 do 
         local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
@@ -135,7 +133,7 @@ else
     cac=wait
 end
 while cac() do 
-    FastAttack()
+    AttackNoCD()
 end
 
 
