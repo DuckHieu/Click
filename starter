@@ -32,6 +32,13 @@ FarmTab:AddToggle({
         AutoFarmQuest = Value
     end    
 })
+FarmTab:AddToggle({
+	Name = "Fast Attack(Risk)",
+	Default = false,
+	Callback = function(Value)
+		_G.AttackNoCD = Value
+	end    
+})
 
 
 
@@ -72,7 +79,7 @@ function GetCurrentBlade()
     while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
     return ret
 end
-function FastAttack() 
+function AttackNoCD()
     local AC = CbFw2.activeController
     for i = 1, 1 do 
         local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
@@ -119,11 +126,16 @@ function FastAttack()
         end
     end
 end
+local cac
 if SuperFastMode then 
-while task.wait(0.0000001) do 
-    FastAttack()
+    cac=task.wait
+else
+    cac=wait
 end
+while cac() do 
+    AttackNoCD()
 end
+
 
 
 function Click()
@@ -444,7 +456,7 @@ function CheckLevel()
     NameMon = "Ship Deckhand"
     CFrameQ = CFrame.new(1040.2927246094, 125.08293151855, 32911.0390625)
     CFrameMon = CFrame.new(921.12365722656, 125.9839553833, 33088.328125)
-    if Auto_Farm and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+    if AutoFarmQuest and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
     end
     elseif Lv == 1275 or Lv <= 1299 or SelectMonster == "Ship Engineer" or SelectArea == 'Ship' then -- Ship Engineer
@@ -454,7 +466,7 @@ function CheckLevel()
     NameMon = "Ship Engineer"
     CFrameQ = CFrame.new(1040.2927246094, 125.08293151855, 32911.0390625)
     CFrameMon = CFrame.new(886.28179931641, 40.47790145874, 32800.83203125)
-    if Auto_Farm and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+    if AutoFarmQuest and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
     end
     elseif Lv == 1300 or Lv <= 1324 or SelectMonster == "Ship Steward" or SelectArea == 'Ship' then -- Ship Steward
@@ -464,7 +476,7 @@ function CheckLevel()
     NameMon = "Ship Steward"
     CFrameQ = CFrame.new(971.42065429688, 125.08293151855, 33245.54296875)
     CFrameMon = CFrame.new(943.85504150391, 129.58183288574, 33444.3671875)
-    if Auto_Farm and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+    if AutoFarmQuest and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
     end
     elseif Lv == 1325 or Lv <= 1349 or SelectMonster == "Ship Officer" or SelectArea == 'Ship' then -- Ship Officer
@@ -474,7 +486,7 @@ function CheckLevel()
     NameMon = "Ship Officer"
     CFrameQ = CFrame.new(971.42065429688, 125.08293151855, 33245.54296875)
     CFrameMon = CFrame.new(955.38458251953, 181.08335876465, 33331.890625)
-    if Auto_Farm and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+    if AutoFarmQuest and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(923.21252441406, 126.9760055542, 32852.83203125))
     end
     elseif Lv == 1350 or Lv <= 1374 or SelectMonster == "Arctic Warrior" or SelectArea == 'Frost' then -- Arctic Warrior
@@ -484,7 +496,7 @@ function CheckLevel()
     NameMon = "Arctic Warrior"
     CFrameQ = CFrame.new(5668.1372070313, 28.202531814575, -6484.6005859375)
     CFrameMon = CFrame.new(5935.4541015625, 77.26016998291, -6472.7568359375)
-    if Auto_Farm and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
+    if AutoFarmQuest and (CFrameMon.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 20000 then
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-6508.5581054688, 89.034996032715, -132.83953857422))
     end
     elseif Lv == 1375 or Lv <= 1424 or SelectMonster == "Snow Lurker" or SelectArea == 'Frost' then -- Snow Lurker
@@ -835,3 +847,7 @@ end
         end)
         AutoFarmQuest = true
         BypassTP = true
+
+
+
+
