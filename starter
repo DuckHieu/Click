@@ -29,7 +29,7 @@ FarmTab:AddToggle({
     Flag = "Farm",
     Save = false,
     Callback = function(Value)
-        AutoFarmQuest = true
+        Auto_Farm = Value
     end    
 })
 
@@ -53,6 +53,9 @@ function Tween(Pos)
         _G.Clip = false
     end
 end
+
+
+
 function Click()
 	if not _G.FastAttack then
 		local Module = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework)
