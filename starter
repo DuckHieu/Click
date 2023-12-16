@@ -26,7 +26,7 @@ local Tabs = {
 }
 local Options = Fluent.Options
 
-do
+
 --------------------------------------------------------------------------------------------------------------------------------------------
 function AntiBan()
     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
