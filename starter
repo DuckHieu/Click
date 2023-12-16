@@ -38,7 +38,7 @@ FarmTab:AddToggle({
     Flag = "Fast",
     Save = false,
     Callback = function(Value)
-        FastAttack() = Value
+    FastAttack = Value
     end    
 })
 
