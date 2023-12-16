@@ -18,12 +18,12 @@ OrionLib:MakeNotification({
 })
 
 
-local Farm = Window:MakeTab({
+local FarmTab = Window:MakeTab({
     Name = "General",
     Icon = "rbxassetid://4483345998",
     PremiumOnly = false
 })
-Farm:AddToggle({
+FarmTab:AddToggle({
     Name = "Auto Farm",
     Default = false,
     Flag = "Farm",
