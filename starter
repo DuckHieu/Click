@@ -18,7 +18,7 @@ SOMEXHUBMODILE.Name = "SOMEXHUBMODILE"
         MODILEGUISOMEXHUB.Position = UDim2.new(0.120833337, 0, 0.0952890813, 0)
         MODILEGUISOMEXHUB.Size = UDim2.new(0, 50, 0, 50)
         MODILEGUISOMEXHUB.Font = Enum.Font.SourceSans
-        MODILEGUISOMEXHUB.Text = "NPT                                               HUB"
+        MODILEGUISOMEXHUB.Text = "F"
         MODILEGUISOMEXHUB.TextColor3 = Color3.fromRGB(255, 255, 0)
         MODILEGUISOMEXHUB.TextSize = 14.000
         MODILEGUISOMEXHUB.Draggable = true
@@ -154,7 +154,7 @@ function Update:Window(text,logo,keybind)
 	Hub.Size = UDim2.new(0, 81, 0, 27)
 	Hub.Font = Enum.Font.GothamSemibold
 	Hub.Text = " HUB"
-	Hub.TextColor3 = _G.Color.fromRGB(255,223,0)
+	Hub.TextColor3 = _G.Color
 	Hub.TextSize = 17.000
 	Hub.TextXAlignment = Enum.TextXAlignment.Left
 	
