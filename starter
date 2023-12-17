@@ -2394,7 +2394,7 @@ function BTP(p)
     FarmTab:AddDropdown({
         Name = "Melee",
         Default = "1",
-        Options = {"Melle", "Sword", "Blox Fruit"},
+        Options = {"Melee", "Sword", "Blox Fruit"},
         Callback = function(Value)
             ChosseWeapon = Value
         end    
@@ -2499,6 +2499,138 @@ function BTP(p)
         end
         end
         end)
+
+
+
+        FarmTab:AddToggle({
+            Name = "Mob Aura (Mastery)",
+            Default = false,
+            Flag = "ToggleMobAura",
+            Save = false,
+            Callback = function(Value)
+                _G.AutoNear = Value
+            end    
+        })
+        spawn(function()
+            while wait(.1) do
+            if _G.AutoNear then
+            pcall(function()
+              for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+              if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+              if v.Name then
+              if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v:FindFirstChild("HumanoidRootPart").Position).Magnitude <= 5000 then
+              repeat task.wait(0.1)
+              AutoHaki()
+              EquipTool(SelectWeapon)
+              Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+              v.HumanoidRootPart.Size = Vector3.new(1, 1, 1)
+              v.HumanoidRootPart.Transparency = 1
+              v.Humanoid.JumpPower = 0
+              v.Humanoid.WalkSpeed = 0
+              v.HumanoidRootPart.CanCollide = false
+              FarmPos = v.HumanoidRootPart.CFrame
+              MonFarm = v.Name
+              Click()
+              until not _G.AutoNear or not v.Parent or v.Humanoid.Health <= 0 or not game.Workspace.Enemies:FindFirstChild(v.Name)
+              end
+              end
+              end
+              end
+              end)
+            end
+            end
+          end)
+
+          
+
+
+          FarmTab:AddButton({
+            Name = "Reedem All Code",
+            Callback = function()
+                      UseCode()
+              end    
+        })
+
+
+
+        function UseCode(Text)
+            game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(Text)
+        end
+        UseCode("Sub2Fer999")
+        UseCode("Enyu_is_Pro")
+        UseCode("Magicbus")
+        UseCode("JCWK")
+        UseCode("Starcodeheo")
+        UseCode("Bluxxy")
+        UseCode("THEGREATACE")
+        UseCode("SUB2GAMERROBOT_EXP1")
+        UseCode("StrawHatMaine")
+        UseCode("Sub2OfficialNoobie")
+        UseCode("SUB2NOOBMASTER123")
+        UseCode("Sub2Daigrock")
+        UseCode("Axiore")
+        UseCode("TantaiGaming")
+        UseCode("STRAWHATMAINE")
+        
+        FarmTab:AddButton({
+            Name = "Boost Fps",
+            Callback = function()
+                      FPSBooster()
+              end    
+        })
+        function FPSBooster()
+            local decalsyeeted = true
+            local g = game
+            local w = g.Workspace
+            local l = g.Lighting
+            local t = w.Terrain
+            sethiddenproperty(l,"Technology",2)
+            sethiddenproperty(t,"Decoration",false)
+            t.WaterWaveSize = 0
+            t.WaterWaveSpeed = 0
+            t.WaterReflectance = 0
+            t.WaterTransparency = 0
+            l.GlobalShadows = false
+            l.FogEnd = 9e9
+            l.Brightness = 0
+            settings().Rendering.QualityLevel = "Level01"
+            for i, v in pairs(g:GetDescendants()) do
+                if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                    v.Material = "Plastic"
+                    v.Reflectance = 0
+                elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+                    v.Transparency = 1
+                elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                    v.Lifetime = NumberRange.new(0)
+                elseif v:IsA("Explosion") then
+                    v.BlastPressure = 1
+                    v.BlastRadius = 1
+                elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                    v.Enabled = false
+                elseif v:IsA("MeshPart") then
+                    v.Material = "Plastic"
+                    v.Reflectance = 0
+                    v.TextureID = 10385902758728957
+                end
+            end
+            for i, e in pairs(l:GetChildren()) do
+                if e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or e:IsA("BloomEffect") or e:IsA("DepthOfFieldEffect") then
+                    e.Enabled = false
+                end
+            end
+        end
+
+        
+        --------------Mastery Tabs---
+        FarmTab:AddParagraph("Paragraph","Auto Farm Mastery")
+        FarmTab:AddDropdown({
+            Name = "Melee",
+            Default = "Farm Mode",
+            Options = {"Level", "Nearest", },
+            Callback = function(Value)
+                TypeMastery = Value
+            end    
+        })
 
 
 
