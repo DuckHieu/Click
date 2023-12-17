@@ -4421,11 +4421,11 @@ end
     end)
     Options.ToggleFastAttack:SetValue(true)
 
-    local ToggleFastAttack2 = Tabs.Setting:AddToggle("ToggleFastAttack", {Title = "Fast Attack2", Default = true })
+    local ToggleFastAttack2 = Tabs.Setting:AddToggle("ToggleFastAttack2", {Title = "Fast Attack2", Default = true })
     ToggleFastAttack:OnChanged(function(vu)
         _G.AttackNoCD = vu
     end)
-    Options.ToggleFastAttack:SetValue(false)
+    Options.ToggleFastAttack:SetValue(true)
     
 
 
