@@ -2530,20 +2530,20 @@ spawn(function()
         task.wait()
     until game.Players.LocalPlayer and game.Players.LocalPlayer.Team ~= nil 
     wait(1.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Vair Hub Release<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Let goo<Color=/>"):Display()
     wait(.5)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Kaitun Not Working<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Vair Hub realse<Color=/>"):Display()
     wait(.14)
-    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Dont Use Delta!!<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Hãy sử dụng Fluxus để có trải nghiệm tốt!!<Color=/>"):Display()
     wait(.24)
-    require(game.ReplicatedStorage.Notification).new("<Color=Red>Join Discord<Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Yellow>Join Discord<Color=/>"):Display()
     wait(.29)
-    require(game.ReplicatedStorage.Notification).new("<Color=Purple>Channel : Vair Hub <Color=/>"):Display()
+    require(game.ReplicatedStorage.Notification).new("<Color=Red>Channel : Vair Hub <Color=/>"):Display()
     wait(.36)
 end)
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "VairHub", HidePremium = false, IntroText = "An Vai", SaveConfig = false, ConfigFolder = "VairHub"})
+local Window = OrionLib:MakeWindow({Name = "VairHub", HidePremium = false, IntroText = "NightHub Library", SaveConfig = true, ConfigFolder = "VairHub"})
 
 OrionLib:MakeNotification({
 	Name = "VairHub",
@@ -2554,7 +2554,7 @@ OrionLib:MakeNotification({
 
 OrionLib:MakeNotification({
 	Name = "VairHub",
-	Content = "VairHub Not Skidder, Please don't says",
+	Content = "An vai khog ne",
 	Image = "rbxassetid://4483345998",
 	Time = 25
 })
