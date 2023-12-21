@@ -1071,7 +1071,7 @@ function library:Createlibrary()
     PlayerUIButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
     PlayerUIButton.BorderSizePixel = 0
     PlayerUIButton.Position = UDim2.new(0.535262227, 0, 0.736842096, 0)
-    PlayerUIButton.Size = UDim2.new(0, 200, 0, 30)
+    PlayerUIButton.Size = UDim2.new(0, 150, 0, 20)
     PlayerUIButton.Font = Enum.Font.FredokaOne
     PlayerUIButton.Text = "Player UI : On"
     PlayerUIButton.TextColor3 = Color3.fromRGB(255, 255, 255)
