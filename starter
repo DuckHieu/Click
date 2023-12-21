@@ -1584,7 +1584,7 @@ function library:Createlibrary()
         MainIsland.Text = "( Moon Mirage IsLand )"
         MainIsland.TextColor3 = Color3.fromRGB(85, 85, 85)
         MainIsland.TextScaled = true
-        MainIsland.TextSize = 14.000
+        MainIsland.TextSize = 12.000
         MainIsland.TextWrapped = true
 
         MainIsland_2.Name = "MainIsland"
@@ -1599,7 +1599,7 @@ function library:Createlibrary()
         MainIsland_2.Text = "🔴"
         MainIsland_2.TextColor3 = Color3.fromRGB(85, 85, 85)
         MainIsland_2.TextScaled = true
-        MainIsland_2.TextSize = 14.000
+        MainIsland_2.TextSize = 11.000
         MainIsland_2.TextWrapped = true
 
         spawn(function()
