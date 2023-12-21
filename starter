@@ -1002,7 +1002,7 @@ function library:Createlibrary()
     Top2.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Top2.BorderSizePixel = 0
     Top2.Position = UDim2.new(0.0350000001, 0, 0.0683333352, 0)
-    Top2.Size = UDim2.new(0, 553, 0, 190)
+    Top2.Size = UDim2.new(0, 443, 0, 190)
 
     LogoBackground.Name = "LogoBackground"
     LogoBackground.Parent = Top2
