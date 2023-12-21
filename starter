@@ -1579,7 +1579,7 @@ function library:Createlibrary()
         MainIsland.BorderColor3 = Color3.fromRGB(0, 0, 0)
         MainIsland.BorderSizePixel = 0
         MainIsland.Position = UDim2.new(0.0957264975, 0, 0.484320551, 0)
-        MainIsland.Size = UDim2.new(0, 185, 0, 12)
+        MainIsland.Size = UDim2.new(0, 165, 0, 12)
         MainIsland.Font = Enum.Font.FredokaOne
         MainIsland.Text = "( Moon Mirage IsLand )"
         MainIsland.TextColor3 = Color3.fromRGB(85, 85, 85)
@@ -1594,7 +1594,7 @@ function library:Createlibrary()
         MainIsland_2.BorderColor3 = Color3.fromRGB(0, 0, 0)
         MainIsland_2.BorderSizePixel = 0
         MainIsland_2.Position = UDim2.new(0.0957264975, 0, 0.581881523, 0)
-        MainIsland_2.Size = UDim2.new(0, 185, 0, 41)
+        MainIsland_2.Size = UDim2.new(0, 166, 0, 41)
         MainIsland_2.Font = Enum.Font.FredokaOne
         MainIsland_2.Text = "🔴"
         MainIsland_2.TextColor3 = Color3.fromRGB(85, 85, 85)
