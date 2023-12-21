@@ -1040,7 +1040,7 @@ function library:Createlibrary()
     Name.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Name.BorderSizePixel = 0
     Name.Position = UDim2.new(0.535262227, 0, 0.184210524, 0)
-    Name.Size = UDim2.new(0, 150, 0, 50)
+    Name.Size = UDim2.new(0, 100, 0, 50)
     Name.Font = Enum.Font.FredokaOne
     Name.Text = "Vair"
     Name.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1166,7 +1166,7 @@ function library:Createlibrary()
 	PlayerUIMain2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	PlayerUIMain2.BorderSizePixel = 2
 	PlayerUIMain2.Position = UDim2.new(1.04166663, 0, 0.521666646, 0)
-	PlayerUIMain2.Size = UDim2.new(0, 585, 0, 287)
+	PlayerUIMain2.Size = UDim2.new(0, 285, 0, 187)
 	PlayerUIMain2.BorderColor3 = Color3.fromRGB(0, 255, 0)
 
 	UICorner_6.CornerRadius = UDim.new(0, 0)
