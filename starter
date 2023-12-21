@@ -1056,7 +1056,7 @@ function library:Createlibrary()
     Hub.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Hub.BorderSizePixel = 0
     Hub.Position = UDim2.new(0.535072386, 0, 0.606578946, 0)
-    Hub.Size = UDim2.new(0, 150, 0, 39)
+    Hub.Size = UDim2.new(0, 130, 0, 39)
     Hub.Font = Enum.Font.FredokaOne
     Hub.Text = "Vair Hub Cuttay "
     Hub.TextColor3 = Color3.fromRGB(4, 255, 0)
