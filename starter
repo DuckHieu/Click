@@ -1154,7 +1154,7 @@ function library:Createlibrary()
 	PlayerUIMain.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	PlayerUIMain.BorderSizePixel = 2
 	PlayerUIMain.Position = UDim2.new(1.04166663, 0, 0, 0)
-	PlayerUIMain.Size = UDim2.new(0, 300, 0, 300)
+	PlayerUIMain.Size = UDim2.new(0, 300, 0, 200)
 	PlayerUIMain.BorderColor3 = Color3.fromRGB(0, 255, 0)
 
 	UICorner_5.CornerRadius = UDim.new(0, 0)
@@ -1166,7 +1166,7 @@ function library:Createlibrary()
 	PlayerUIMain2.BorderColor3 = Color3.fromRGB(0, 0, 0)
 	PlayerUIMain2.BorderSizePixel = 2
 	PlayerUIMain2.Position = UDim2.new(1.04166663, 0, 0.521666646, 0)
-	PlayerUIMain2.Size = UDim2.new(0, 285, 0, 187)
+	PlayerUIMain2.Size = UDim2.new(0, 285, 0, 167)
 	PlayerUIMain2.BorderColor3 = Color3.fromRGB(0, 255, 0)
 
 	UICorner_6.CornerRadius = UDim.new(0, 0)
