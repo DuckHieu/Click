@@ -1138,7 +1138,7 @@ function library:Createlibrary()
     Buttom.BorderColor3 = Color3.fromRGB(0, 0, 0)
     Buttom.BorderSizePixel = 0
     Buttom.Position = UDim2.new(0.0416666679, 0, 0.49666667, 0)
-    Buttom.Size = UDim2.new(0, 300, 0, 284)
+    Buttom.Size = UDim2.new(0, 300, 0, 254)
 
     Labe3.Name = "Labe3"
     Labe3.Parent = Buttom
@@ -1246,7 +1246,7 @@ function library:Createlibrary()
         Start.BorderColor3 = Color3.fromRGB(0, 0, 0)
         Start.BorderSizePixel = 0
         Start.Position = UDim2.new(0.00728597445, 0, 0.323943675, 0)
-        Start.Size = UDim2.new(0, 453, 0, 100)
+        Start.Size = UDim2.new(0, 400, 0, 100)
 
         Button11.Name = "Button11"
         Button11.Parent = Start
