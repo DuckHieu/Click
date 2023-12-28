@@ -1,0 +1,603 @@
+_G.ChooseTeam = "Marine"
+
+repeat wait() until game.Players
+repeat wait() until game.Players.LocalPlayer
+repeat wait() until game.ReplicatedStorage
+repeat wait() until game.ReplicatedStorage:FindFirstChild("Remotes");
+repeat wait() until game.Players.LocalPlayer:FindFirstChild("PlayerGui");
+repeat wait() until game.Players.LocalPlayer.PlayerGui:FindFirstChild("Main");
+repeat wait() until game:GetService("Players")
+if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
+local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "Universe Hub",
+    SubTitle = "",
+    TabWidth = 100,
+    Size = UDim2.fromOffset(480, 300),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "" }),
+    Farm = Window:AddTab({ Title = "Other Farm", Icon = "" }),
+	ItemsFarm = Window:AddTab({ Title = "Items Farm", Icon = "" }),
+    Raid_DF = Window:AddTab({ Title = "Raid & DF", Icon = "" }),
+    Race = Window:AddTab({ Title = "Race", Icon = "" }),
+    SeaEvent = Window:AddTab({ Title = "Sea Event", Icon = "" }),
+    Misc = Window:AddTab({ Title = "Misc", Icon = "" }),
+    Shop = Window:AddTab({ Title = "Shop", Icon = "" }),
+}
+
+function Notify(Title, Content, SubContent, Duration)
+	Fluent:Notify({
+		Title = Title,
+		Content = Content,
+		SubContent = SubContent,
+		Duration = Duration
+	})
+end
+
+local Options = Fluent.Options
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageButton = Instance.new("ImageButton")
+local UICorner = Instance.new("UICorner")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageButton.Parent = ScreenGui
+ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+ImageButton.Position = UDim2.new(0.10615778, 0, 0.16217947, 0)
+ImageButton.Size = UDim2.new(0.0627121851, 0, 0.107579626, 0)
+ImageButton.Image = "rbxassetid://15686409674"
+
+UICorner.CornerRadius = UDim.new(0, 30)
+UICorner.Parent = ImageButton
+
+UIAspectRatioConstraint.Parent = ImageButton
+UIAspectRatioConstraint.AspectRatio = 0.988
+
+local function MoveButton()
+	local script = Instance.new('LocalScript', ImageButton)
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+	script.Parent.MouseButton1Click:Connect(function()
+		game:GetService("VirtualInputManager"):SendKeyEvent(true,Enum.KeyCode.LeftControl,false,game)
+	end)
+end
+coroutine.wrap(MoveButton)()
+
+--// Config
+_G.Config = {
+	-- Main Tab
+		-- Farm Settings
+			["Auto_Haki"] = true,
+			["Weapon_Type"] = "Melee",
+			["Bring_Mob"] = true,
+			["Fast_Attack_Delay"] = 0.15,
+			["Fast_Attack"] = true,
+		-- Global
+			["Auto_Farm_Level"] = false,
+		-- Sea1
+			["Auto_Second_Sea"] = false,
+		-- Sea2
+			["Auto_Third_Sea"] = false,
+		-- Sea3
+			["Auto_Castle_Raid"] = false,
+			["Auto_Farm_Elite"] = false,
+		-- Mastery
+			["Mastery_Farm"] = false,
+			["Mastery_Farm_Health"] = 25,
+			["Mastery_Farm_Type"] = "Blox Fruit",
+	-- Farm Tab
+		-- Sea1
+			["ABC"] = false,
+		-- Sea2
+			["Auto_Farm_Ectoplasm"] = false,
+		-- Sea3
+			-- Bones
+				["Auto_Farm_Bones"] = false,
+				["Get_Quest_Bones"] = false,
+				["Auto_Trade_Bones"] = false,
+			-- Cake Boss
+				["Auto_Cake_Prince"] = false,
+				["Auto_Dough_King"] = false,
+				["Get_Quest_Cake"] = false,
+}
+
+function LoadConfig()
+	if readfile and writefile and isfile and isfolder then
+		if not isfolder("UniverseHub") then
+			print("deo co folder 1")
+			makefolder("UniverseHub")
+		end
+		if not isfolder("UniverseHub/BF/") then
+			print("deo co folder 2")
+			makefolder("UniverseHub/BF/")
+		end
+		if not isfile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json") then
+			print("deo co folder 3")
+			writefile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(_G.Config))
+		else
+			local Decode = game:GetService("HttpService"):JSONDecode(readfile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json"))
+			for i,v in pairs(Decode) do
+				_G.Config[i] = v
+			end
+		end
+	else
+		return warn("[Universe Hub] Executor Error")
+	end
+end
+
+function SaveConfig()
+	if readfile and writefile and isfile and isfolder then
+		if not isfile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json") then
+			LoadConfig()
+		else
+			local Decode = game:GetService("HttpService"):JSONDecode(readfile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json"))
+			local Array = {}
+			for i,v in pairs(_G.Config) do
+				Array[i] = v
+			end
+			writefile("UniverseHub/BF/" .. game.Players.LocalPlayer.Name .. ".json", game:GetService("HttpService"):JSONEncode(Array))
+		end
+	else
+		return warn("[Universe Hub] Executor Error")
+	end
+end
+
+LoadConfig()
+
+--// Function
+--PlaceId Check
+if game.PlaceId == 2753915549 then
+    Sea1 = true
+elseif game.PlaceId == 4442272183 then
+    Sea2 = true
+elseif game.PlaceId == 7449423635 then
+    Sea3 = true
+end
+
+--Choose Team
+
+--Anti AFK
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+	game:GetService("VirtualUser"):Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	wait(1)
+	game:GetService("VirtualUser"):Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+--Remove Effecct
+spawn(function()
+    while wait() do
+        for i, v in pairs(game:GetService("Workspace")["_WorldOrigin"]:GetChildren()) do
+            pcall(function()
+                if v.Name == ("CurvedRing") or v.Name == ("SlashHit") or v.Name == ("SwordSlash") or v.Name == ("SlashTail") then --or v.Name == ("Sounds")
+                    v:Destroy()
+                end
+            end)
+        end
+    end
+end)
+
+--Auto Haki
+spawn(function()
+	while wait() do
+		if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") and _G.Config["Auto Haki"] then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+		end
+	end
+end)
+
+--Tween
+function Tween(Pos)
+    local Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance >= 1 then
+        Speed = 250
+    end
+    game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+        CFrame = Pos
+    }):Play()
+    if _G.StopTween then
+        game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+            CFrame = Pos
+        }):Cancel()
+    end
+end
+
+function CancelTween(target)
+    if not target then
+        _G.StopTween = true
+        wait()
+        Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+        wait()
+        _G.StopTween = false
+    end
+end
+
+--Equip Weapons
+function GetWeapon(ToolTips)
+    Tools = ""
+    for r, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == ToolTips then
+            Tools = v.Name
+        end
+    end
+    for r, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Tool") and v.ToolTip == ToolTips then
+            Tools = v.Name
+        end
+    end
+    return Tools
+end
+
+function EquipWeapon(ToolSe)
+    if NoEquipWeapon then
+        return
+    end
+    if Wp == "" or Wp == nil then
+        Wp = "Melee"
+    end
+    ToolSe = GetWeapon(Wp)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        NoClip = true
+        local Tools = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.4)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(Tools)
+        NoClip = false
+    end
+end
+
+--Function RmFzdCBBdHRhY2s=
+local CameraShaker = require(game.ReplicatedStorage.Util.CameraShaker)
+CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+y = debug.getupvalues(CombatFrameworkR)[2]
+spawn(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
+		if _G.FastAttackFaiFao then
+			if typeof(y) == "table" then
+				pcall(function()
+					CameraShaker:Stop()
+					y.activeController.timeToNextAttack = (math.huge^math.huge^math.huge)
+					y.activeController.timeToNextAttack = 0
+					y.activeController.hitboxMagnitude = 60
+					y.activeController.active = false
+					y.activeController.timeToNextBlock = 0
+					y.activeController.focusStart = 1655503339.0980349
+					y.activeController.increment = 1
+					y.activeController.blocking = false
+					y.activeController.attacking = false
+					y.activeController.humanoid.AutoRotate = true
+				end)
+			end
+		end
+	end)
+end)
+spawn(function()
+	game:GetService("RunService").RenderStepped:Connect(function()
+		if _G.FastAttackFaiFao or _G.FastAttackCambodiakak == true then
+			game.Players.LocalPlayer.Character.Stun.Value = 0
+			game.Players.LocalPlayer.Character.Busy.Value = false        
+		end
+	end)
+end)
+
+function GetBladeHit()
+	local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+	local CmrFwLib = CombatFrameworkLib[2]
+	local p13 = CmrFwLib.activeController
+	local weapon = p13.blades[1]
+	if not weapon then 
+		return weapon
+	end
+	while weapon.Parent ~= game.Players.LocalPlayer.Character do
+		weapon = weapon.Parent 
+	end
+	return weapon
+end
+function AttackFunction()
+	local CombatFrameworkLib = debug.getupvalues(require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework))
+	local CmrFwLib = CombatFrameworkLib[2]
+	local plr = game.Players.LocalPlayer
+	for i = 1, 1 do
+		local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(plr.Character,{plr.Character.HumanoidRootPart},60)
+		local cac = {}
+		local hash = {}
+		for k, v in pairs(bladehit) do
+			if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+				table.insert(cac, v.Parent.HumanoidRootPart)
+				hash[v.Parent] = true
+			end
+		end
+		bladehit = cac
+		if #bladehit > 0 then
+			pcall(function()
+				CmrFwLib.activeController.timeToNextAttack = 1
+				CmrFwLib.activeController.attacking = false
+				CmrFwLib.activeController.blocking = false
+				CmrFwLib.activeController.timeToNextBlock = 0
+				CmrFwLib.activeController.increment = 3
+				CmrFwLib.activeController.hitboxMagnitude = 60
+				CmrFwLib.activeController.focusStart = 0
+				game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetBladeHit()))
+				game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "")
+			end)
+		end
+	end
+end
+
+coroutine.wrap(function()
+	while task.wait() do
+		local ac = CombatFrameworkR.activeController
+		if ac and ac.equipped then
+			wait(.1)
+			if FastAttack and _G.Config["Fast Attack"] then
+				if _G.Config["Fast_Attack_Delay"] == 0 then wait()
+				elseif _G.Config["Fast_Attack_Delay"] == 0.1 then wait(0.1)
+				elseif _G.Config["Fast_Attack_Delay"] == 0.15 then wait(0.15)
+				elseif _G.Config["Fast_Attack_Delay"] == 0.2 then wait(0.2)
+				elseif _G.Config["Fast_Attack_Delay"] == 0.25 then wait(0.25)
+				end
+				AttackFunction()
+			elseif FastAttack and _G.Config["Fast_Attack"] == false then
+				if ac.hitboxMagnitude ~= 55 then
+					ac.hitboxMagnitude = 55
+				end
+				ac:attack()
+			end
+		end
+	end
+end)()
+
+------------------------------// UI \\------------------------------
+--// Main Tab
+Tabs.Main:AddParagraph({
+	Title = "",
+	Content = "Farm Settings"
+})
+
+AutoHaki_Toggle = Tabs.Main:AddToggle("AutoHaki", {
+	Title = "Auto Enable Haki",
+	Default = _G.Config["Auto_Haki"],
+	Callback = function(Value)
+		_G.Config["Auto_Haki"] = Value
+	end
+})
+
+WeaponType_Dropdown = Tabs.Main:AddDropdown("WeaponType", {
+	Title = "Weapon Type",
+	Values = {"Melee", "Sword", "Blox Fruits"},
+	Multi = false,
+	Default = _G.Config["Weapon_Type"],
+	Callback = function(Value)
+		_G.Config["Weapon_Type"] = Value
+	end
+})
+
+BringMob_Toggle = Tabs.Main:AddToggle("BringMob", {
+	Title = "Bring Mob",
+	Default = _G.Config["Bring_Mob"],
+	Callback = function(Value)
+		_G.Config["Bring_Mob"] = Value
+	end
+})
+
+FastAttackDelay_Dropdown = Tabs.Main:AddDropdown("FastAttackDelay", {
+	Title = "Fast Attack Delay",
+	Values = {0, 0.1, 0.15, 0.2, 0.25},
+	Multi = false,
+	Default = _G.Config["Fast_Attack_Delay"],
+	Callback = function(Value)
+		_G.Config["Fast_Attack_Delay"] = Value
+	end
+})
+
+FastAttack_Toggle = Tabs.Main:AddToggle("FastAttack", {
+	Title = "Fast Attack",
+	Default = _G.Config["Fast_Attack"],
+	Callback = function(Value)
+		_G.Config["Fast_Attack"] = Value
+	end
+})
+
+Tabs.Main:AddParagraph({
+	Title = "",
+	Content = "Main Farm"
+})
+
+AutoFarmLevel_Toggle = Tabs.Main:AddToggle("AutoFarmLevel", {
+	Title = "Auto Farm Level",
+	Default = _G.Config["Auto_Farm_Level"],
+	Callback = function(Value)
+		_G.Config["Auto_Farm_Level"] = Value
+	end
+})
+
+if Sea1 then
+	AutoSecondSea_Toggle = Tabs.Main:AddToggle("AutoSecondSea", {
+		Title = "Auto Second Sea",
+		Default = _G.Config["Auto_Second_Sea"],
+		Callback = function(Value)
+			_G.Config["Auto_Second_Sea"] = Value
+		end
+	})
+end
+
+if Sea2 then
+	AutoThirdSea_Toggle = Tabs.Main:AddToggle("AutoThirdSea", {
+		Title = "Auto Third Sea",
+		Default = _G.Config["Auto_Third_Sea"],
+		Callback = function(Value)
+			_G.Config["Auto_Third_Sea"] = Value
+		end
+	})
+end
+
+if Sea3 then
+	AutoCastleRaid_Toggle = Tabs.Main:AddToggle("AutoCastleRaid", {
+		Title = "Auto Castle Raid",
+		Default = _G.Config["Auto_Castle_Raid"],
+		Callback = function(Value)
+			_G.Config["Auto_Castle_Raid"] = Value
+		end
+	})
+
+	AutoFarmElite_Toggle = Tabs.Main:AddToggle("AutoFarmElite", {
+		Title = "Auto Farm Elite",
+		Default = _G.Config["Auto_Farm_Elite"],
+		Callback = function(Value)
+			_G.Config["Auto_Farm_Elite"] = Value
+		end
+	})
+end
+
+Tabs.Main:AddParagraph({
+	Title = "",
+	Content = "Mastery"
+})
+
+MasteryFarm_Toggle = Tabs.Main:AddToggle("MasteryFarm", {
+	Title = "Mastery Farm",
+	Default = _G.Config["Mastery_Farm"],
+	Callback = function(Value)
+		_G.Config["Mastery_Farm"] = Value
+	end
+})
+
+MasteryFarmHealth_Slider = Tabs.Main:AddSlider("MasteryFarmHealth", {
+	Title = "Health [ % ]",
+	Default = _G.Config["Mastery_Farm_Health"],
+	Min = 1,
+	Max = 100,
+	Rounding = 1,
+	Callback = function(Value)
+		_G.Config["Mastery_Farm_Health"] = Value
+	end
+})
+
+MasteryFarmType_Dropdown = Tabs.Main:AddDropdown("MasteryFarmType", {
+	Title = "Fast Attack Delay",
+	Values = {"Blox Fruit", "Gun"},
+	Multi = false,
+	Default = _G.Config["Mastery_Farm_Type"],
+	Callback = function(Value)
+		_G.Config["Mastery_Farm_Type"] = Value
+	end
+})
+
+--// Farm Tab
+if Sea2 then
+	Tabs.Farm:AddParagraph({
+		Title = "",
+		Content = "Ectoplasm"
+	})
+
+	AutoFarmEctoplasm_Toggle = Tabs.Farm:AddToggle("AutoFarmEctoplasm", {
+		Title = "Auto Farm Ectoplasm",
+		Default = _G.Config["Auto_Farm_Ectoplasm"],
+		Callback = function(Value)
+			_G.Config["Auto_Farm_Ectoplasm"] = Value
+		end
+	})
+end
+
+if Sea3 then
+	Tabs.Farm:AddParagraph({
+		Title = "",
+		Content = "Bones"
+	})
+
+	AutoFarmBones_Toggle = Tabs.Farm:AddToggle("AutoFarmBones", {
+		Title = "Auto Farm Bones",
+		Default = _G.Config["Auto_Farm_Bones"],
+		Callback = function(Value)
+			_G.Config["Auto_Farm_Bones"] = Value
+		end
+	})
+
+	GetQuestBones_Toggle = Tabs.Farm:AddToggle("GetQuestBones", {
+		Title = "Get Quest Bones",
+		Default = _G.Config["Get_Quest_Bones"],
+		Callback = function(Value)
+			_G.Config["Get_Quest_Bones"] = Value
+		end
+	})
+
+	AutoTradeBones_Toggle = Tabs.Farm:AddToggle("AutoTradeBones", {
+		Title = "Auto Trade Bones",
+		Default = _G.Config["Auto_Trade_Bones"],
+		Callback = function(Value)
+			_G.Config["Auto_Trade_Bones"] = Value
+		end
+	})
+
+	Tabs.Farm:AddParagraph({
+		Title = "",
+		Content = "Cake"
+	})
+
+	AutoCakePrince_Toggle = Tabs.Farm:AddToggle("AutoCakePrince", {
+		Title = "Auto Cake Prince",
+		Default = _G.Config["Auto_Cake_Prince"],
+		Callback = function(Value)
+			_G.Config["Auto_Cake_Prince"] = Value
+		end
+	})
+
+	AutoDoughKing_Toggle = Tabs.Farm:AddToggle("AutoDoughKing", {
+		Title = "Auto Dough King",
+		Default = _G.Config["Auto_Dough_King"],
+		Callback = function(Value)
+			_G.Config["Auto_Dough_King"] = Value
+		end
+	})
+
+	GetQuestCake_Toggle = Tabs.Farm:AddToggle("GetQuestCake", {
+		Title = "Get Quest Cake",
+		Default = _G.Config["Get_Quest_Cake"],
+		Callback = function(Value)
+			_G.Config["Get_Quest_Cake"] = Value
+		end
+	})
+end
